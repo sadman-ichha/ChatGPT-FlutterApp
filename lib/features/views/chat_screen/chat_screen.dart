@@ -1,8 +1,14 @@
 import 'package:chatgpt/core/constents/assets_manager.dart';
+import 'package:chatgpt/core/constents/font_manager.dart';
 import 'package:chatgpt/core/global%20widgets/chat_widget.dart';
+import 'package:chatgpt/core/services/api_services.dart';
 import 'package:chatgpt/core/themes/app_colors.dart';
+import 'package:chatgpt/features/views/chat_screen/components/bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/providers/models_provider.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -28,6 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final modelsProvider = Provider.of<ModelsProvider>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -43,6 +50,14 @@ class _ChatScreenState extends State<ChatScreen> {
           "ChatGPT",
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0),
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await ChatComponents.showModalSheet(context: context);
+            },
+            icon: const Icon(Icons.more_vert_rounded, color: Colors.white),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -50,7 +65,11 @@ class _ChatScreenState extends State<ChatScreen> {
             child: ListView.builder(
                 itemCount: 5,
                 itemBuilder: (context, index) {
-                  return ChatWidget();
+                  return ChatWidget(
+                    chatMassage: chatMessages[index]["msg"].toString(),
+                    chatIndex:
+                        int.parse(chatMessages[index]["chatIndex"].toString()),
+                  );
                 }),
           ),
           _isTyping
@@ -60,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 )
               : const SizedBox.shrink(),
           Card(
-            color: Color.fromARGB(255, 230, 222, 222),
+            color: const Color.fromARGB(255, 230, 222, 222),
             elevation: 10,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -76,7 +95,18 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      try {
+                         print("req has been send");
+                        await ApiService.sendMessage(
+                          message: _textController!.text,
+                          modelId: modelsProvider.getCurrentModel.toString(),
+                        );
+                       
+                      } catch (e) {
+                        print("error: $e");
+                      }
+                    },
                     icon: Image.asset(
                       AppImages.sendLogo,
                       height: 20.0,

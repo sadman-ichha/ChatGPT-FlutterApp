@@ -1,10 +1,21 @@
 import 'package:chatgpt/core/constents/font_manager.dart';
+import 'package:chatgpt/core/providers/models_provider.dart';
 import 'package:chatgpt/core/themes/app_colors.dart';
 import 'package:chatgpt/features/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const ChatGPT());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: ((context) => ModelsProvider()),
+        ),
+      ],
+      child: const ChatGPT(),
+    ),
+  );
 }
 
 class ChatGPT extends StatelessWidget {
