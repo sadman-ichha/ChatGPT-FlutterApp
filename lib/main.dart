@@ -1,3 +1,5 @@
+import 'package:chatgpt/core/constents/font_manager.dart';
+import 'package:chatgpt/core/themes/app_colors.dart';
 import 'package:chatgpt/features/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +14,11 @@ class ChatGPT extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
-      home: SplashScreen(),
+      theme: ThemeData(
+        fontFamily: FontConstants.fontFamily,
+        scaffoldBackgroundColor: AppColors.whiteColor,
+      ),
+      home: const SplashScreen(),
     );
   }
 }
