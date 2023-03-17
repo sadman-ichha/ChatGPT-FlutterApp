@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chatgpt/core/constents/assets_manager.dart';
 import 'package:chatgpt/core/global%20widgets/text_widget.dart';
 import 'package:chatgpt/core/themes/app_colors.dart';
@@ -30,9 +31,29 @@ class ChatWidget extends StatelessWidget {
                     chatIndex == 0 ? AppImages.manImg : AppImages.botImage),
                 const SizedBox(width: 8.0),
                 Expanded(
-                  child: TextWidget(
-                    label: chatMassage,
-                  ),
+                  child: chatIndex == 0
+                      ? TextWidget(
+                          label: chatMassage,
+                          // color: Colors.black,
+                        )
+                      : DefaultTextStyle(
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                            fontFamily: "Nunito",
+                          ),
+                          child: AnimatedTextKit(
+                              isRepeatingAnimation: false,
+                              repeatForever: false,
+                              totalRepeatCount: 1,
+                              displayFullTextOnTap: true,
+                              animatedTexts: [
+                                TyperAnimatedText(
+                                  chatMassage.trim(),
+                                ),
+                              ]),
+                        ),
                 ),
                 chatIndex == 0
                     ? const SizedBox.shrink()

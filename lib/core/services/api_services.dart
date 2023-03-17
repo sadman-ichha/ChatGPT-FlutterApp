@@ -8,7 +8,7 @@ import 'package:http/http.dart';
 import '../../features/views/chat_screen/data/models_model.dart';
 
 class ApiService {
-  static Future<List<ModelsModel>?> getModels() async {
+  static Future<List<ModelsModel>> getModels() async {
     String modelApiUrl = "$BASE_URL/models";
     try {
       Response response = await http.get(Uri.parse(modelApiUrl),
@@ -38,7 +38,7 @@ class ApiService {
   }
 
 // send Message from user
-  static Future<List<ChatModel>?> sendMessage(
+  static Future<List<ChatModel>> sendMessage(
       {required String message, required String modelId}) async {
     String sendApiUrl = "$BASE_URL/completions";
 
@@ -63,8 +63,8 @@ class ApiService {
         throw HttpException(jsonResponse['error']["message"]);
       }
 
-      List<ChatModel> chatList = [];
-      chatList = List.generate(
+      List<ChatModel> chatLists = [];
+      chatLists = List.generate(
         jsonResponse["choices"].length,
         (index) => ChatModel(
           msg: jsonResponse["choices"][index]["text"],
@@ -75,8 +75,9 @@ class ApiService {
       if (jsonResponse["choices"].length > 0) {
         log("send Responseeeeeeeeeee : ${jsonResponse["choices"][0]["text"]}");
       }
+      return chatLists;
     } catch (error) {
-      // log("error is : $error");
+      log("error is : $error");
       rethrow;
     }
   }

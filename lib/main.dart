@@ -1,4 +1,5 @@
 import 'package:chatgpt/core/constents/font_manager.dart';
+import 'package:chatgpt/core/providers/chat_provider.dart';
 import 'package:chatgpt/core/providers/models_provider.dart';
 import 'package:chatgpt/core/themes/app_colors.dart';
 import 'package:chatgpt/features/views/splash_screen/splash_screen.dart';
@@ -11,6 +12,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: ((context) => ModelsProvider()),
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => ChatProvider()),
         ),
       ],
       child: const ChatGPT(),

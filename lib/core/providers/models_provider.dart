@@ -5,7 +5,7 @@ import '../services/api_services.dart';
 class ModelsProvider extends ChangeNotifier {
   String currentModel ="text-davinci-003" ;
 
-  String? get getCurrentModel {
+  String get getCurrentModel {
     return currentModel;
   }
 
@@ -21,7 +21,7 @@ class ModelsProvider extends ChangeNotifier {
   }
 
   Future<List<ModelsModel>?> getAllModels() async {
-    modelsList = (await ApiService.getModels())!;
+    modelsList = (await ApiService.getModels());
     return modelsList;
   }
 }
