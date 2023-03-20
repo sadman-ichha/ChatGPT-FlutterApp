@@ -4,7 +4,7 @@ import '../services/api_services.dart';
 
 class ChatProvider with ChangeNotifier {
   List<ChatModel> chatList = [];
- List<ChatModel> get getChatList {
+  List<ChatModel> get getChatList {
     return chatList;
   }
 
@@ -13,18 +13,10 @@ class ChatProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<void> sendMessageANDgetAns(
-  //     {required String message, required String choseneModelId}) async {
-  //   chatList.addAll(await ApiService.sendMessage(
-  //     message: message,
-  //     modelId: choseneModelId,
-  //   ));
-  // }
-
   Future<void> sendMessageANDgetAns(
       {required String message, required String chosenModelId}) async {
     if (chosenModelId.toLowerCase().startsWith("gpt")) {
-      chatList.addAll(await ApiService.sendMessage(
+      chatList.addAll(await ApiService.sendMessageFromGptTurbo(
         message: message,
         modelId: chosenModelId,
       ));

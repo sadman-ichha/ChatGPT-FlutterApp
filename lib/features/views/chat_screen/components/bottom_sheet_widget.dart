@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constents/font_manager.dart';
 import '../../../../core/global widgets/text_widget.dart';
 import 'drop_down_widget.dart';
 
@@ -26,15 +25,15 @@ class ChatComponents {
         });
   }
 
-  static List<DropdownMenuItem<String?>>? modelsItems =
-      List<DropdownMenuItem<String?>>.generate(
-    models.length,
-    (index) => DropdownMenuItem(
-      value: models[index],
-      child: TextWidget(
-        label: models[index],
-        fontSize: 16,
-      ),
-    ),
-  );
+//   static List<DropdownMenuItem<String?>>? modelsItems =
+//       List<DropdownMenuItem<String?>>.generate(
+//     models.length,
+//     (index) => DropdownMenuItem(
+//       value: models[index],
+//       child: TextWidget(
+//         label: models[index],
+//         fontSize: 16,
+//       ),
+//     ),
+//   );
 }

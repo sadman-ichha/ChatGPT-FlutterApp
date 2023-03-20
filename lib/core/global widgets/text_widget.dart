@@ -15,7 +15,7 @@ class TextWidget extends StatelessWidget {
   final FontWeight? fontWeight;
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return SelectableText(
       label,
       style: TextStyle(
         color: color ?? Colors.black87,
@@ -25,3 +25,13 @@ class TextWidget extends StatelessWidget {
     );
   }
 }
+
+// Text(
+//       label,
+//       style: TextStyle(
+//         color: color ?? Colors.black87,
+//         fontSize: fontSize,
+//         fontWeight: fontWeight ?? FontWeight.w500,
+//       ),
+//     );
+  

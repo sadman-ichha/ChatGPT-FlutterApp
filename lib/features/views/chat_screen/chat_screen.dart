@@ -78,7 +78,6 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         _isTyping = true;
         chatProvider.addMessage(meassage: _textController!.text);
-
         focusNode.unfocus();
       });
       await chatProvider.sendMessageANDgetAns(
